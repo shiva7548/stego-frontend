@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganalysis Forensic Scanner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="sf-header">
+        <h1>Steganalysis Forensic Scanner</h1>
+    </div>
+
+    <div class="api-config-card">
+        <label for="api-url">Backend API URL:</label>
+        <input type="text" id="api-url" value="https://stego-backend.onrender.com" placeholder="https://your-backend.onrender.com">
+    </div>
+
+    <div class="tabs-header">
+        <button class="tab-btn active">Single Image Analysis</button>
+    </div>
+
+    <div class="card">
+        <input type="file" id="image-upload" accept="image/*">
+        <button class="btn-primary" id="analyze-btn">Analyze Image</button>
+    </div>
+
+    <div id="results" style="display: none;">
+        <div class="verdict-box" id="verdict"></div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Confidence Score</div>
+                <div class="metric-value" id="conf-val"></div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Clean Mass</div>
+                <div class="metric-value" id="clean-val"></div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Threat Score</div>
+                <div class="metric-value" id="threat-val"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

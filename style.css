@@ -1,0 +1,179 @@
+:root {
+  --sf-bg: #e2e8f0;
+  --sf-card: #f8fafc;
+  --sf-line: #cbd5e1;
+  --sf-ink: #0f172a;
+  --sf-muted: #475569;
+  --sf-blue: #2563eb;
+  --sf-blue-dark: #1e40af;
+  --sf-clean: #047857;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background-color: var(--sf-bg);
+  color: var(--sf-ink);
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.sf-header {
+  background: linear-gradient(135deg, #334155 0%, #475569 50%, #64748b 100%);
+  border-radius: 16px;
+  padding: 24px 30px;
+  margin-bottom: 20px;
+  color: #f8fafc;
+}
+
+.sf-header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.api-config-card {
+  background: #ffffff;
+  border: 1px solid var(--sf-line);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.api-config-card input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--sf-line);
+  font-size: 14px;
+}
+
+.tabs-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 12px 20px;
+  border: none;
+  background: #cbd5e1;
+  color: var(--sf-blue-dark);
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.tab-btn.active {
+  background: var(--sf-blue);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.card {
+  background: var(--sf-card);
+  border: 1px solid var(--sf-line);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background: var(--sf-blue);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.verdict-box {
+  padding: 18px 22px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.verdict-clean {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.verdict-stego {
+  background: #fff1f2;
+  color: #0f172a;
+  border: 1px solid #fca5a5;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  background: #fff1f2;
+  border: 1px solid #fca5a5;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.metric-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 6px;
+  color: #0f172a;
+}
+
+.prob-row {
+  margin-bottom: 12px;
+}
+
+.prob-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #0f172a;
+}
+
+.prob-track {
+  height: 8px;
+  background: #fee2e2;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.prob-fill {
+  height: 100%;
+  background: #0f172a;
+  border-radius: 999px;
+}
