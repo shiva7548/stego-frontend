@@ -30,6 +30,8 @@
       <div class="col-left">
         <div class="sf-panel">
           <div class="sf-panel-title">Input Image</div>
+
+          <!-- Upload area with X button -->
           <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
             <input type="file" id="file-input" accept="image/*" style="display:none" onchange="onFileSelected(this)">
             <img id="preview-img" src="" alt="" style="display:none; width:100%; border-radius:12px;">
@@ -40,8 +42,17 @@
               </svg>
               <p>Click to upload an image</p>
             </div>
+            <!-- X remove button — hidden until image is loaded -->
+            <button class="remove-btn" id="single-remove-btn" onclick="clearSingleInput(event)" style="display:none" title="Remove image">
+              ✕
+            </button>
           </div>
-          <button class="btn-primary" onclick="runSingle()">Analyse Image</button>
+
+          <!-- Buttons row: Analyse + Clear Input -->
+          <div class="btn-row">
+            <button class="btn-primary" id="analyse-btn" onclick="runSingle()">Analyse Image</button>
+            <button class="btn-clear" id="single-clear-btn" onclick="clearSingleInput(event)" style="display:none">Clear Input</button>
+          </div>
         </div>
       </div>
 
@@ -103,7 +114,8 @@
   <div class="tab-content" id="panel-batch">
     <div class="sf-panel">
       <div class="sf-panel-title">Batch input</div>
-      <p style="margin:0 0 12px; font-size:14px; color:#5b6b8c">Upload up to 20 JPEGs. Each file is sent to the backend and classified independently.</p>
+
+      <!-- Upload area with X button -->
       <div class="upload-area" id="batch-upload-area" onclick="document.getElementById('batch-file-input').click()">
         <input type="file" id="batch-file-input" accept=".jpg,.jpeg" multiple style="display:none" onchange="onBatchFilesSelected(this)">
         <div id="batch-placeholder" class="upload-placeholder">
@@ -114,8 +126,17 @@
           <p>Click to upload JPEG files</p>
         </div>
         <div id="batch-file-list" class="batch-file-list"></div>
+        <!-- X remove button for batch -->
+        <button class="remove-btn" id="batch-remove-btn" onclick="clearBatchInput(event)" style="display:none" title="Remove all files">
+          ✕
+        </button>
       </div>
-      <button class="btn-primary" onclick="runBatch()">Run Batch Scan</button>
+
+      <!-- Buttons row: Scan + Clear Input -->
+      <div class="btn-row">
+        <button class="btn-primary" onclick="runBatch()">Run Batch Scan</button>
+        <button class="btn-clear" id="batch-clear-btn" onclick="clearBatchInput(event)" style="display:none">Clear Input</button>
+      </div>
     </div>
 
     <div id="batch-loading" class="loading-wrap" style="display:none">

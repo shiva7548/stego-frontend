@@ -43,7 +43,31 @@ function onFileSelected(input) {
   img.src = url;
   img.style.display = 'block';
   document.getElementById('upload-placeholder').style.display = 'none';
+  // Show X and Clear buttons
+  document.getElementById('single-remove-btn').style.display = 'flex';
+  document.getElementById('single-clear-btn').style.display  = 'block';
+  // Stop the upload-area click from re-opening file picker when X was clicked
+  document.getElementById('upload-area').onclick = null;
   // Reset old results
+  clearSingleResults();
+}
+
+function clearSingleInput(e) {
+  if (e) { e.stopPropagation(); e.preventDefault(); }
+  // Reset file input
+  const fi = document.getElementById('file-input');
+  fi.value = '';
+  // Reset preview
+  const img = document.getElementById('preview-img');
+  img.src = '';
+  img.style.display = 'none';
+  document.getElementById('upload-placeholder').style.display = 'flex';
+  // Hide X and Clear buttons
+  document.getElementById('single-remove-btn').style.display = 'none';
+  document.getElementById('single-clear-btn').style.display  = 'none';
+  // Restore upload area click
+  document.getElementById('upload-area').onclick = () => fi.click();
+  // Clear results
   clearSingleResults();
 }
 
@@ -54,6 +78,7 @@ function clearSingleResults() {
   document.getElementById('summary-wrap').style.display         = 'none';
   document.getElementById('single-loading').style.display       = 'none';
 }
+
 
 // ============================================================
 // Single image — run analysis
@@ -208,12 +233,30 @@ function onBatchFilesSelected(input) {
     listEl.innerHTML = batchFiles.map(f =>
       `<span class="batch-file-chip">${escHtml(f.name)}</span>`
     ).join('');
+    // Show X and Clear buttons
+    document.getElementById('batch-remove-btn').style.display = 'flex';
+    document.getElementById('batch-clear-btn').style.display  = 'block';
+    // Disable upload-area click so X doesn't re-open file picker
+    document.getElementById('batch-upload-area').onclick = null;
   } else {
-    placeholder.style.display = 'flex';
-    listEl.innerHTML = '';
+    clearBatchInput();
   }
 
   document.getElementById('batch-results-wrap').style.display = 'none';
+}
+
+function clearBatchInput(e) {
+  if (e) { e.stopPropagation(); e.preventDefault(); }
+  batchFiles = [];
+  const fi = document.getElementById('batch-file-input');
+  fi.value = '';
+  document.getElementById('batch-placeholder').style.display = 'flex';
+  document.getElementById('batch-file-list').innerHTML = '';
+  document.getElementById('batch-remove-btn').style.display = 'none';
+  document.getElementById('batch-clear-btn').style.display  = 'none';
+  document.getElementById('batch-results-wrap').style.display = 'none';
+  // Restore upload area click
+  document.getElementById('batch-upload-area').onclick = () => fi.click();
 }
 
 // ============================================================
