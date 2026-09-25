@@ -19,27 +19,16 @@ function switchTab(tab) {
 }
 
 // ============================================================
-// Backend health check — auto-wake Render on page load
+// Silent backend wake — Render free tier sleeps after 15 min.
+// This ping fires on page load so the server is warm by the
+// time the user clicks Analyse. Nothing is shown in the UI.
 // ============================================================
-async function checkBackend() {
-  const dot  = document.getElementById('status-dot');
-  const text = document.getElementById('status-text');
-  dot.className  = 'status-dot waking';
-  text.textContent = 'Waking backend…';
-
+async function wakeBackend() {
   try {
-    const res = await fetch(BACKEND + '/health', { signal: AbortSignal.timeout(30000) });
-    const data = await res.json();
-    if (data.model_loaded) {
-      dot.className    = 'status-dot online';
-      text.textContent = 'Backend ready ✓';
-    } else {
-      dot.className    = 'status-dot offline';
-      text.textContent = 'Backend: model not loaded';
-    }
-  } catch (e) {
-    dot.className    = 'status-dot offline';
-    text.textContent = 'Backend offline — refresh to retry';
+    await fetch(BACKEND + '/health', { signal: AbortSignal.timeout(30000) });
+  } catch (_) {
+    // Silently ignore — user will see the loading spinner if
+    // the backend is slow; it will succeed on first retry.
   }
 }
 
@@ -344,5 +333,5 @@ function escHtml(str) {
 // Init — wake the backend as soon as the page loads
 // ============================================================
 window.addEventListener('DOMContentLoaded', () => {
-  checkBackend();
+  wakeBackend();
 });

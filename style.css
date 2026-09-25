@@ -1,6 +1,6 @@
 /* ============================================================
    Steganalysis Forensic Scanner — Frontend CSS
-   Mirrors the Gradio app color scheme exactly
+   Responsive · Hover effects · No status indicator
    ============================================================ */
 
 :root {
@@ -11,111 +11,107 @@
   --sf-muted:     #475569;
   --sf-blue:      #2563eb;
   --sf-blue-dark: #1e40af;
+  --sf-blue-hover:#1d4ed8;
   --sf-clean:     #047857;
 }
 
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 16px; }
 
 body {
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   background: var(--sf-bg);
   color: var(--sf-ink);
   margin: 0;
-  padding: 20px;
+  padding: clamp(12px, 3vw, 28px);
+  min-height: 100vh;
 }
 
 .gradio-container {
   max-width: 1180px;
   margin: 0 auto;
+  width: 100%;
 }
 
-/* ---- Header ---- */
+/* ============================================================
+   Header
+   ============================================================ */
 .sf-header {
   background: linear-gradient(135deg, #334155 0%, #475569 50%, #64748b 100%);
   border-radius: 18px;
-  padding: 26px 32px;
-  margin-bottom: 22px;
+  padding: clamp(18px, 3vw, 26px) clamp(20px, 4vw, 32px);
+  margin-bottom: 20px;
   box-shadow: 0 10px 25px -10px rgba(51, 65, 85, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
 }
 
 .sf-header h1 {
   margin: 0;
   color: #f8fafc;
-  font-size: 28px;
+  font-size: clamp(20px, 4vw, 28px);
   font-weight: 700;
   letter-spacing: -0.4px;
 }
 
-.backend-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #cbd5e1;
-  font-weight: 500;
-}
-
-.status-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #94a3b8;
-  flex-shrink: 0;
-  transition: background 0.4s;
-}
-.status-dot.online  { background: #4ade80; }
-.status-dot.offline { background: #f87171; }
-.status-dot.waking  { background: #fbbf24; animation: pulse 1s infinite; }
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
-}
-
-/* ---- Tab Nav ---- */
+/* ============================================================
+   Tab Navigation
+   ============================================================ */
 .tab-nav {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .tab-btn {
-  padding: 12px 22px;
+  padding: clamp(10px, 2vw, 12px) clamp(14px, 3vw, 22px);
   border: none;
   background: #cbd5e1;
   color: var(--sf-blue-dark);
   font-weight: 600;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 15px;
-  transition: background 0.2s, color 0.2s;
+  font-size: clamp(13px, 2vw, 15px);
+  transition: background 0.18s, color 0.18s, transform 0.12s, box-shadow 0.18s;
+  flex: 1;
+  min-width: 140px;
+}
+
+.tab-btn:hover {
+  background: #b6c5d8;
+  color: var(--sf-blue-dark);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  transform: translateY(-1px);
 }
 
 .tab-btn.active {
   background: var(--sf-blue);
   color: #ffffff;
   font-weight: 700;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.tab-btn.active:hover {
+  background: var(--sf-blue-hover);
+  transform: translateY(-1px);
 }
 
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* ---- Panel ---- */
+/* ============================================================
+   Panel Card
+   ============================================================ */
 .sf-panel {
   background: var(--sf-card);
   border: 1px solid var(--sf-line);
   border-radius: 16px;
-  padding: 18px 20px;
+  padding: clamp(14px, 2.5vw, 20px);
   margin-bottom: 4px;
 }
 
 .sf-panel-title {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -123,7 +119,9 @@ body {
   margin-bottom: 12px;
 }
 
-/* ---- Two-column layout ---- */
+/* ============================================================
+   Two-column layout  (stack on mobile)
+   ============================================================ */
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -131,74 +129,122 @@ body {
   align-items: start;
 }
 
-@media (max-width: 720px) {
-  .two-col { grid-template-columns: 1fr; }
-}
-
-.col-left  { display: flex; flex-direction: column; gap: 0; }
+.col-left  { display: flex; flex-direction: column; }
 .col-right { display: flex; flex-direction: column; gap: 14px; }
 
-/* ---- Upload Area ---- */
+/* ============================================================
+   Upload Area
+   ============================================================ */
 .upload-area {
   border: 2px dashed var(--sf-line);
   border-radius: 14px;
-  min-height: 260px;
+  min-height: clamp(180px, 25vw, 280px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   overflow: hidden;
   margin-bottom: 14px;
   background: #fff;
   position: relative;
+  width: 100%;
 }
 
-.upload-area:hover { border-color: var(--sf-blue); background: #f0f4ff; }
+.upload-area:hover {
+  border-color: var(--sf-blue);
+  background: #f0f4ff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
 
 .upload-placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: #94a3b8;
   text-align: center;
-  padding: 20px;
+  padding: 24px;
+  pointer-events: none;
 }
-.upload-placeholder p { margin: 0; font-size: 14px; }
 
-/* ---- Button ---- */
+.upload-placeholder p {
+  margin: 0;
+  font-size: clamp(12px, 2vw, 14px);
+}
+
+/* ============================================================
+   Primary Button  — with strong hover / active states
+   ============================================================ */
 .btn-primary {
   background: var(--sf-blue);
   color: #ffffff;
   border: none;
-  padding: 13px 28px;
+  padding: clamp(11px, 2vw, 13px) clamp(18px, 3vw, 28px);
   border-radius: 10px;
-  font-size: 15px;
+  font-size: clamp(14px, 2vw, 15px);
   font-weight: 600;
   cursor: pointer;
   width: 100%;
-  transition: background 0.2s;
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  position: relative;
+  overflow: hidden;
 }
-.btn-primary:hover { background: #1d4ed8; }
-.btn-primary:disabled { background: #94a3b8; cursor: not-allowed; }
 
-/* ---- Verdict ---- */
+/* Ripple shimmer on hover */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.35s;
+}
+
+.btn-primary:hover {
+  background: var(--sf-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.38);
+}
+
+.btn-primary:hover::after {
+  transform: translateX(100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ============================================================
+   Verdict Badge
+   ============================================================ */
 .verdict {
   display: flex;
   align-items: center;
   gap: 12px;
   border-radius: 14px;
-  padding: 18px 22px;
-  font-size: 21px;
+  padding: clamp(14px, 2.5vw, 18px) clamp(16px, 3vw, 22px);
+  font-size: clamp(16px, 3vw, 21px);
   font-weight: 700;
   letter-spacing: -0.2px;
 }
+
 .verdict-clean { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
 .verdict-stego { background: #dbeafe; color: #0f172a; border: 1px solid #93c5fd; }
 .verdict-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
-/* ---- Metric Cards ---- */
+/* ============================================================
+   Metric Cards
+   ============================================================ */
 .metrics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -209,22 +255,22 @@ body {
   background: #eff6ff;
   border: 1px solid #bfdbfe;
   border-radius: 14px;
-  padding: 16px 18px;
+  padding: clamp(12px, 2vw, 16px) clamp(12px, 2vw, 18px);
 }
 
 .metric-value {
-  font-size: 28px;
+  font-size: clamp(22px, 4vw, 28px);
   font-weight: 700;
   letter-spacing: -1px;
   color: #0f172a;
   line-height: 1.1;
 }
 
-.metric-unit { font-size: 14px; font-weight: 600; color: #0f172a; }
+.metric-unit { font-size: 13px; font-weight: 600; color: #0f172a; }
 
 .metric-label {
   margin-top: 5px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -238,59 +284,71 @@ body {
   background: #dbeafe;
   overflow: hidden;
 }
+
 .metric-fill {
   height: 100%;
   border-radius: 999px;
   background: #0f172a;
-  transition: width 0.5s ease;
+  transition: width 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---- Loading Spinner ---- */
+/* ============================================================
+   Loading Spinner  (shown during analysis)
+   ============================================================ */
 .loading-wrap {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 20px;
+  padding: clamp(16px, 3vw, 24px);
   font-size: 14px;
   color: var(--sf-muted);
+  background: var(--sf-card);
+  border: 1px solid var(--sf-line);
+  border-radius: 14px;
 }
+
 .spinner {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   border: 3px solid #e2e8f0;
   border-top-color: var(--sf-blue);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.75s linear infinite;
   flex-shrink: 0;
 }
+
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ---- Summary Card ---- */
+/* ============================================================
+   Summary + Probability Table
+   ============================================================ */
 .summary {
   background: #eff6ff;
   border: 1px solid #bfdbfe;
   border-radius: 14px;
-  padding: 20px 22px;
+  padding: clamp(16px, 2.5vw, 20px) clamp(16px, 3vw, 22px);
 }
+
 .summary-headline {
-  font-size: 17px;
+  font-size: clamp(14px, 2.5vw, 17px);
   font-weight: 700;
   color: #0f172a;
   margin-bottom: 8px;
 }
+
 .summary-body {
   margin: 0 0 16px;
-  font-size: 14.5px;
+  font-size: clamp(13px, 2vw, 14.5px);
   line-height: 1.65;
   color: #0f172a;
 }
 
-/* ---- Probability Table ---- */
 table.probs {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13.5px;
+  font-size: clamp(12px, 2vw, 13.5px);
 }
+
 table.probs th {
   text-align: left;
   font-size: 11px;
@@ -301,14 +359,18 @@ table.probs th {
   padding: 8px 10px;
   border-bottom: 1px solid #bfdbfe;
 }
+
 table.probs td {
   padding: 9px 10px;
   border-bottom: 1px solid #e2e8f0;
   color: #0f172a;
 }
+
 table.probs .num { text-align: right; font-variant-numeric: tabular-nums; }
 
-/* ---- Batch File List ---- */
+/* ============================================================
+   Batch file chips
+   ============================================================ */
 .batch-file-list {
   display: flex;
   flex-wrap: wrap;
@@ -316,6 +378,7 @@ table.probs .num { text-align: right; font-variant-numeric: tabular-nums; }
   padding: 10px;
   width: 100%;
 }
+
 .batch-file-chip {
   background: #e0e7ff;
   color: #3730a3;
@@ -325,7 +388,9 @@ table.probs .num { text-align: right; font-variant-numeric: tabular-nums; }
   font-weight: 500;
 }
 
-/* ---- Batch Result Cards ---- */
+/* ============================================================
+   Batch Result Cards
+   ============================================================ */
 .batch-card {
   border: 1px solid #bfdbfe;
   border-left-width: 4px;
@@ -334,25 +399,32 @@ table.probs .num { text-align: right; font-variant-numeric: tabular-nums; }
   margin-top: 10px;
   background: #eff6ff;
 }
+
 .batch-clean { border-left-color: #0f172a; }
 .batch-stego { border-left-color: #0f172a; }
 .batch-file    { font-size: 13px; font-weight: 600; color: #0f172a; word-break: break-all; }
 .batch-verdict { font-size: 14px; font-weight: 700; margin-top: 3px; color: #0f172a; }
 .batch-metrics { margin-top: 4px; font-size: 12.5px; color: #0f172a; }
 
-/* ---- Scrollable results table ---- */
+/* ============================================================
+   Batch Results Table
+   ============================================================ */
 .table-wrap {
   overflow-x: auto;
   border-radius: 14px;
   border: 1px solid var(--sf-line);
   background: var(--sf-card);
   margin-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
 }
+
 .results-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: clamp(11px, 1.8vw, 13px);
+  min-width: 600px;
 }
+
 .results-table th {
   background: #f1f5f9;
   color: #0f172a;
@@ -365,10 +437,54 @@ table.probs .num { text-align: right; font-variant-numeric: tabular-nums; }
   border-bottom: 1px solid var(--sf-line);
   white-space: nowrap;
 }
+
 .results-table td {
   padding: 9px 12px;
   border-bottom: 1px solid #f1f5f9;
   color: #0f172a;
   vertical-align: middle;
 }
-.results-table tbody tr:hover { background: #f8fafc; }
+
+.results-table tbody tr:hover { background: #f0f4ff; }
+
+/* ============================================================
+   Upload area for batch
+   ============================================================ */
+.upload-area.batch-drop { min-height: 100px; }
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* Tablet: 720px and below — stack columns */
+@media (max-width: 720px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile: 480px and below — single column metrics */
+@media (max-width: 480px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-btn {
+    font-size: 13px;
+    padding: 10px 12px;
+    min-width: 0;
+  }
+
+  .sf-header {
+    border-radius: 12px;
+  }
+
+  .verdict {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+}
